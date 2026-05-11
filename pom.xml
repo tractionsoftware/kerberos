@@ -3,45 +3,225 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.tractionsoftware.kerberos</groupId>
-  <artifactId>tractionsoftware-kerberos</artifactId>
-  <version>2.0</version>
-  <name>Traction Software ASN</name>
-  <inceptionYear>2023</inceptionYear>
-  <description>
-    Java library supporting Kerberos authentication in the context of an HTTP server. This code was originally from the alfresco-remote-api project (https://github.com/Alfresco/alfresco-remote-api). As required by the license accompanying the original source, this software is therefore governed by the LGPLv3 license.
-  </description>
-  <url>https://tractionsoftware.com/</url>
+    <groupId>com.tractionsoftware.kerberos</groupId>
+    <artifactId>tractionsoftware-kerberos</artifactId>
+    <version>3.0</version>
 
-  <developers>
-    <developer>
-      <name>Dave Shepperton</name>
-      <id>shep</id>
-      <email>shep@tractionsoftware.com</email>
-      <organization>Traction Software, Inc.</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
+    <name>Traction Software Kerberos</name>
+    <inceptionYear>2023</inceptionYear>
+    <description>
+        Java library supporting Kerberos authentication in the context of an HTTP server.
+        This code was originally part of the alfresco-remote-api project
+        (https://github.com/Alfresco/alfresco-remote-api). As required by the license
+        accompanying the original source, this software is governed by the LGPLv3 license.
+    </description>
+    <url>https://github.com/tractionsoftware/kerberos</url>
 
-  <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+    <organization>
+        <name>Traction Software, Inc.</name>
+        <url>https://tractionsoftware.com/</url>
+    </organization>
 
-  <!--- TODO: add maven reference when com.tractionsoftware.asn is in Maven. -->
-  <dependencies>
-    <dependency>
-      <groupId>com.tractionsoftware.asn</groupId>
-      <artifactId>tractionsoftware-asn</artifactId>
-      <version>2.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/lib/tractionsoftware-asn-2.0.jar</systemPath>
-    </dependency>
-  </dependencies>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License, Version 3.0</name>
+            <url>https://www.gnu.org/licenses/lgpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Dave Shepperton</name>
+            <id>dshepperton</id>
+            <email>shep@tractionsoftware.com</email>
+            <organization>Traction Software, Inc.</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/tractionsoftware/kerberos.git</connection>
+        <developerConnection>scm:git:git@github.com:tractionsoftware/kerberos.git</developerConnection>
+        <url>https://github.com/tractionsoftware/kerberos</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/tractionsoftware/kerberos/issues</url>
+    </issueManagement>
+
+    <properties>
+        <maven.compiler.source>26</maven.compiler.source>
+        <maven.compiler.target>26</maven.compiler.target>
+        <maven.compiler.release>26</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Plugin versions -->
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
+        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+    </properties>
+
+    <!--- TODO: add maven reference when com.tractionsoftware.asn is in Maven. -->
+    <dependencies>
+        <dependency>
+            <groupId>com.tractionsoftware.asn</groupId>
+            <artifactId>tractionsoftware-asn</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../asn/target/tractionsoftware-asn-3.0.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${maven-source-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${maven-gpg-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <releaseProfiles>release</releaseProfiles>
+                        <goals>deploy</goals>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonatype.central</groupId>
+                    <artifactId>central-publishing-maven-plugin</artifactId>
+                    <version>${central-publishing-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <!--
+          Activate with `mvn -P release deploy` to build sources + javadoc, GPG-sign all
+          artifacts, and publish to the Maven Central Publishing Portal.
+        -->
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doclint>none</doclint>
+                            <quiet>true</quiet>
+                            <source>${maven.compiler.source}</source>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Use a passphrase agent (gpg-agent or pinentry); never put the passphrase in the POM. -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <!-- Server credentials live in ~/.m2/settings.xml under <server><id>central</id>...</server> -->
+                            <publishingServerId>central</publishingServerId>
+                            <!--
+                              autoPublish=true   : publish automatically once validations pass.
+                              autoPublish=false  : leave the deployment in the portal UI for manual review/release.
+                              Start with false until you've verified the first release looks right.
+                            -->
+                            <autoPublish>false</autoPublish>
+                            <waitUntil>validated</waitUntil>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
